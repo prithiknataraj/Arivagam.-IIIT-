@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <title>Arivagam.</title>
+    <style>
+      .nanba {
+        background-image: url("/static/img/nanba.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: fixed;
+      }
+
+      #nanba-body {
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #nanba-body::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      #nanba-body::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 6px;
+      }
+
+      #nanba-body::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      .fixed-form {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 125, 92, 0.2);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .form-control {
+        width: 200%;
+        margin-right: 10px;
+      }
+      .btn-primary {
+        width: 10%;
+      }
+      .bot-qn {
+        width: 50%;
+        display: flex;
+        align-items: center;
+      }
+      .bot-qn input.doubt {
+        flex: 1;
+        margin-right: 10px;
+      }
+      .bot-qn button {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+      .chat-container {
+        max-height: 82.5vh;
+        overflow-y: auto;
+        margin-top: 300px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+      .message {
+        margin: 5px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .query-box {
+        background-color: rgba(255, 255, 255, 0.85);
+        color: black;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        border-radius: 10px;
+      }
+      .output-box {
+        background-color: rgba(222, 109, 81, 0.6);
+        backdrop-filter: blur(3px);
+        width: 100%;
+        color: white;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+        border-radius: 10px;
+      }
+
+      #submitButton {
+        width: 5rem;
+        color: rgba(255, 125, 92, 0.8);
+        background-color: transparent;
+        border: none;
+        font-size: 2rem;
+        padding: none;
+        margin: none;
+        outline: none;
+      }
+
+      #submitButton:hover {
+        color: rgba(220, 112, 85, 0.8);
+        border: none;
+      }
+    </style>
+  </head>
+  <body class="nanba">
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      style="background-color: rgba(255, 125, 92, 0.8)"
+      id="mainNav"
+    >
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#" data-translate="navbarTitle"
+          >Arivagam</a
+        >
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-translate="navbarLanguage"
+                >Language</a
+              >
+              <ul
+                class="dropdown-menu"
+                style="
+                  backdrop-filter: blur(7px);
+                  background-color: rgba(255, 182, 86, 0.6);
+                "
+              >
+                <li>
+                  <button onclick="setLanguage('en')" class="dropdown-item">
+                    English
+                  </button>
+                </li>
+                <li>
+                  <button onclick="setLanguage('hi')" class="dropdown-item">
+                    हिंदी
+                  </button>
+                </li>
+                <li>
+                  <button onclick="setLanguage('ta')" class="dropdown-item">
+                    தமிழ்
+                  </button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5 chat-container" id="nanba-body">
+      <div
+        class="row"
+        style="
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div
+          class="col-md-6"
+          style="
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-item: center;
+            justify-content: center;
+          "
+        >
+          <div
+            class="chat-messages"
+            id="chatMessages"
+            style="
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+              align-item: center;
+              justify-content: center;
+            "
+          ></div>
+          <div
+            class="fixed-form mt-3"
+            style="
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+              align-item: center;
+              justify-content: center;
+            "
+          >
+            <form class="bot-qn" id="chatForm" method="POST">
+              <input
+                type="text"
+                class="form-control doubt"
+                placeholder="Ask your doubts here..."
+                style="
+                  border-radius: 2rem;
+                  background-color: rgba(255, 255, 255, 0.6);
+                "
+                name="dbt"
+              />
+              <button type="submit" id="submitButton">
+                <i class="bx bxs-send"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const chatMessages = document.getElementById("chatMessages");
+      const chatForm = document.getElementById("chatForm");
+
+      function appendMessage(sender, message) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+        messageDiv.classList.add(
+          sender === "user" ? "query-box" : "output-box"
+        );
+        messageDiv.textContent = message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      chatForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(chatForm);
+        const query = formData.get("dbt");
+
+        appendMessage("user", query);
+
+        try {
+          const response = await fetch("/ChatBot", {
+            method: "POST",
+            body: new URLSearchParams({ dbt: query }),
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+          });
+          const data = await response.json();
+          appendMessage("bot", data.output);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+
+        chatForm.reset();
+      });
+    </script>
+  </body>
+</html>
