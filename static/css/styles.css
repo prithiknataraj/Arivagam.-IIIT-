@@ -11275,8 +11275,8 @@ header.masthead {
   padding-bottom: calc(10rem - 4.5rem);
   background: linear-gradient(
       to bottom,
-      rgba(92, 77, 66, 0.3) 0%,
-      rgba(92, 77, 66, 0.3) 100%
+      rgba(92, 77, 66, 0.8) 0%,
+      rgba(92, 77, 66, 0.8) 100%
     ),
     url("/static/img/LandingPage.jpg");
   background-position: center;
@@ -11400,18 +11400,4 @@ header.masthead .h1 {
 #portfolio .container-xl .portfolio-box:hover .portfolio-box-caption,
 #portfolio .container-xxl .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
-}
-
-/* -----------------------Landing Page----------------------- */
-.dropdown-menu {
-  border: none;
-  background-color: #f8f9fa; 
-}
-
-.dropdown-item {
-  color: #333; 
-}
-
-.dropdown-item:hover {
-  background-color: #e9ecef; 
 }
