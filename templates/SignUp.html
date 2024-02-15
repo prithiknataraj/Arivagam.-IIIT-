@@ -34,12 +34,135 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/static/css/styles.css" rel="stylesheet" />
     <style>
+      .body {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+      }
+
       #login {
         margin-top: 0px; /* Adjust this value as needed */
       }
+
+      #page-top {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #SU-header {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        overflow: auto;
+      }
+
+      #SU-header::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      #SU-header::-webkit-scrollbar-thumb {
+        background-color: rgb(222, 109, 81);
+      }
+
+      #SU-header::-webkit-scrollbar-track {
+        background-color: rgb(222, 109, 81);
+      }
+
+      .SU-body {
+        background-color: rgba(222, 109, 81, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 2rem;
+        border: rgba(255, 255, 255, 0.4) solid 1px;
+        height: auto;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        box-sizing: border-box;
+      }
+
+      #SU-form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .big {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .small {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem;
+      }
+
+      .small label {
+        color: rgba(255, 255, 255, 0.756);
+      }
+
+      .small input {
+        background-color: rgba(222, 109, 81, 0.2);
+        backdrop-filter: blur(5px);
+        color: white;
+        border: none;
+      }
+
+      .small input:focus {
+        color: white;
+      }
+
+      .small input.has-value {
+        background-color: rgba(222, 109, 81, 0.2);
+        backdrop-filter: blur(5px);
+      }
+
+      .small input:valid {
+        background-color: rgba(222, 109, 81, 0.2);
+        backdrop-filter: blur(5px);
+      }
+
+      .small input:invalid {
+        background-color: rgba(222, 109, 81, 0.2);
+        backdrop-filter: blur(5px);
+      }
+
+      .small select {
+        background-color: rgba(222, 109, 81, 0.2);
+        backdrop-filter: blur(5px);
+        color: white;
+        border: none;
+      }
+
+      .small select option {
+        background-color: rgba(222, 109, 81, 0.2);
+        backdrop-filter: blur(5px);
+      }
+
+      .small select option:hover {
+        background-color: rgb(222, 109, 81);
+      }
     </style>
   </head>
-  <body id="page-top">
+  <body>
     <!-- Navigation -->
     <nav
       class="navbar navbar-expand-lg navbar-light fixed-top py-3"
@@ -105,233 +228,218 @@
       </div>
     </nav>
 
-    <header class="masthead" style="height: 900px">
-      <div class="container px-4 px-lg-5 h-100">
-        <!-- Signup Form -->
-        <section class="page-section" id="login">
-          <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-lg-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h2
-                      class="card-title text-center"
-                      data-translate="formTitleSignUp"
-                    >
-                      SIGN UP
-                    </h2>
-                    <form method="POST" action="SignUp">
-                      <div class="row form-column">
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="username"
-                            class="form-label"
-                            data-translate="formLabelFirstName"
-                            >First Name</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="firstname"
-                            name="firstname"
-                            required
-                          />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="name"
-                            class="form-label"
-                            data-translate="formLabelLastName"
-                            >Last Name</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="lstname"
-                            name="lastname"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div class="row form-column">
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="age"
-                            class="form-label"
-                            data-translate="formLabelAge"
-                            >Age</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="age"
-                            name="age"
-                            required
-                          />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="Mail-id"
-                            class="form-label"
-                            data-translate="formLabelMail"
-                            >Mail-id</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="mail"
-                            name="email"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div class="row form-column">
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="genderSelect"
-                            class="form-label"
-                            data-translate="formLabelGender"
-                            >Gender</label
-                          >
-                          <select
-                            class="form-select"
-                            id="genderSelect"
-                            name="gender"
-                            required
-                          >
-                            <option value="">Select an option</option>
-                            <option value="male" data-translate="dropdownMale">
-                              Male
-                            </option>
-                            <option
-                              value="female"
-                              data-translate="dropdownFemale"
-                            >
-                              Female
-                            </option>
-                            <option
-                              value="none"
-                              data-translate="dropdownPreferNotToSay"
-                            >
-                              Prefer not to say
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="row form-column">
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="language1Select"
-                            class="form-label"
-                            data-translate="formLabelPreferredLanguage1"
-                            >Preferred Language 1</label
-                          >
-                          <select
-                            class="form-select"
-                            id="language1Select"
-                            name="preflang1"
-                            required
-                          >
-                            <option value="">Select an option</option>
-                            <option value="Tamil">Tamil</option>
-                            <option value="English">English</option>
-                            <option value="Hindi">Hindi</option>
-                            <option value="Tamil">French</option>
-                            <option value="Tamil">Spannish</option>
-                            <option value="Tamil">German</option>
-                            <option value="Tamil">Telugu</option>
-                            <option value="Tamil">Malayalam</option>
-                          </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="language2Select"
-                            class="form-label"
-                            data-translate="formLabelPreferredLanguage2"
-                            >Preferred Language 2</label
-                          >
-                          <select
-                            class="form-select"
-                            id="language2Select"
-                            name="preflang2"
-                            required
-                          >
-                            <option value="">Select an option</option>
-                            <option value="Tamil">Tamil</option>
-                            <option value="English">English</option>
-                            <option value="Hindi">Hindi</option>
-                            <option value="Tamil">French</option>
-                            <option value="Tamil">Spannish</option>
-                            <option value="Tamil">German</option>
-                            <option value="Tamil">Telugu</option>
-                            <option value="Tamil">Malayalam</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="row form-column">
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="password"
-                            class="form-label"
-                            data-translate="formLabelPassword"
-                            >Password</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="password"
-                            name="password"
-                            required
-                          />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <label
-                            for="confirmPassword"
-                            class="form-label"
-                            data-translate="formLabelConfirmPassword"
-                            >Confirm Password</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="confirmPassword"
-                            name="confpassword"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div class="text-center">
-                        <button
-                          type="submit"
-                          class="btn btn-primary"
-                          data-translate="formButtonSignUp"
-                        >
-                          Sign up
-                        </button>
-                        <h6>{{correction}}</h6>
-                        <br />
-                        <p
-                          data-translate="formTextAlreadyUser"
-                          style="color: black"
-                        >
-                          Already a user? &nbsp;<a href="Login">Login</a>
-                        </p>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
+    <header class="masthead" id="SU-header">
+      <!-- Signup Form -->
+      <div class="SU-body">
+        <h2
+          class="card-title text-center"
+          data-translate="formTitleSignUp"
+          style="padding-bottom: 2rem; color: white"
+        >
+          SIGN UP
+        </h2>
+        <form method="POST" action="SignUp" id="SU-form">
+          <div class="big">
+            <div class="small">
+              <label
+                for="username"
+                class="form-label"
+                data-translate="formLabelFirstName"
+                >First Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="firstname"
+                name="firstname"
+                required
+              />
+            </div>
+            <div class="small">
+              <label
+                for="name"
+                class="form-label"
+                data-translate="formLabelLastName"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="lstname"
+                name="lastname"
+                required
+              />
             </div>
           </div>
-        </section>
+          <div class="big">
+            <div class="small">
+              <label for="age" class="form-label" data-translate="formLabelAge"
+                >Age</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="age"
+                name="age"
+                required
+              />
+            </div>
+            <div class="small">
+              <label
+                for="Mail-id"
+                class="form-label"
+                data-translate="formLabelMail"
+                >Mail-id</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="mail"
+                name="email"
+                required
+              />
+            </div>
+          </div>
+          <div class="big">
+            <div class="small">
+              <label
+                for="genderSelect"
+                class="form-label"
+                data-translate="formLabelGender"
+                >Gender</label
+              >
+              <select
+                class="form-select"
+                id="genderSelect"
+                name="gender"
+                required
+              >
+                <option value="">Select an option</option>
+                <option value="male" data-translate="dropdownMale">Male</option>
+                <option value="female" data-translate="dropdownFemale">
+                  Female
+                </option>
+                <option value="none" data-translate="dropdownPreferNotToSay">
+                  Prefer not to say
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="big">
+            <div class="small">
+              <label
+                for="language1Select"
+                class="form-label"
+                data-translate="formLabelPreferredLanguage1"
+                >Preferred Language 1</label
+              >
+              <select
+                class="form-select"
+                id="language1Select"
+                name="preflang1"
+                required
+              >
+                <option value="">Select an option</option>
+                <option value="Tamil">Tamil</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Tamil">French</option>
+                <option value="Tamil">Spannish</option>
+                <option value="Tamil">German</option>
+                <option value="Tamil">Telugu</option>
+                <option value="Tamil">Malayalam</option>
+              </select>
+            </div>
+            <div class="small">
+              <label
+                for="language2Select"
+                class="form-label"
+                data-translate="formLabelPreferredLanguage2"
+                >Preferred Language 2</label
+              >
+              <select
+                class="form-select"
+                id="language2Select"
+                name="preflang2"
+                required
+              >
+                <option value="">Select an option</option>
+                <option value="Tamil">Tamil</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Tamil">French</option>
+                <option value="Tamil">Spannish</option>
+                <option value="Tamil">German</option>
+                <option value="Tamil">Telugu</option>
+                <option value="Tamil">Malayalam</option>
+              </select>
+            </div>
+          </div>
+          <div class="big">
+            <div class="small">
+              <label
+                for="password"
+                class="form-label"
+                data-translate="formLabelPassword"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="small">
+              <label
+                for="confirmPassword"
+                class="form-label"
+                data-translate="formLabelConfirmPassword"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                name="confpassword"
+                required
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-translate="formButtonSignUp"
+              style="margin-top: 2rem; width: 10rem"
+            >
+              Sign up
+            </button>
+            <h6>{{correction}}</h6>
+            <br />
+            <p data-translate="formTextAlreadyUser" style="color: white">
+              Already a user? &nbsp;<a href="Login">Login</a>
+            </p>
+          </div>
+        </form>
       </div>
     </header>
     <!-- Footer -->
-    <footer class="bg-light py-5">
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-muted" data-translate="footerText">
-          Copyright &copy; 2023 - Team Arivagam
-        </div>
+    <footer
+      style="
+        height: 7%;
+        display: flex;
+        align-item: center;
+        justify-content: center;
+      "
+    >
+      <div
+        class="small text-center text-muted"
+        data-translate="footerText"
+        style="align-item: center; justify-content: center"
+      >
+        Copyright &copy; 2023 - Team Arivagam
       </div>
     </footer>
     <!-- Bootstrap core JS -->
