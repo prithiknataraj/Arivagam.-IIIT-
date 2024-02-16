@@ -36,9 +36,9 @@
         getUrlParams(window.location.href)["roomID"] ||
         Math.floor(Math.random() * 10000) + "";
       const userID = Math.floor(Math.random() * 10000) + "";
-      const userName = "Sujay";
-      const appID = 831900175;
-      const serverSecret = "68b5b109d494f2429863e8413e230f6e";
+      const userName = "userName" + userID;
+      const appID = 1361183555;
+      const serverSecret = "efcfce8115ca20675a5a763c3cbfd61d";
       const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
         appID,
         serverSecret,
@@ -66,8 +66,8 @@
           mode: ZegoUIKitPrebuilt.VideoConference,
         },
 
-        turnOnMicrophoneWhenJoining: false,
-        turnOnCameraWhenJoining: false,
+        turnOnMicrophoneWhenJoining: true,
+        turnOnCameraWhenJoining: true,
         showMyCameraToggleButton: true,
         showMyMicrophoneToggleButton: true,
         showAudioVideoSettingsButton: true,
