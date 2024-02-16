@@ -82,7 +82,7 @@ def SignUp():
                      'history1':hist1,'history2':hist2, 'history3':hist3,
                      'age':age, 'subtitle':subtitle,
                      'id':id,'preflang1':preflang1, 'gender':gender, 
-                     'preflang2':preflang2,'confpassword':confpassword,"elite":"no"}
+                     'preflang2':preflang2,'confpassword':confpassword}
         db.users.insert_one(user_data)
 
         session['user'] = username
@@ -133,7 +133,6 @@ def home():
     user = db.users.find_one({'username': session['user']})
     if user:
         age=user.get('age') 
-        epass = user.get('elite')
     if request.method == 'POST':
         to_search = request.form['ytsearch']
         playsearch = request.form['ytplay']
@@ -175,7 +174,7 @@ def home():
                 db.users.update_one({'username':session['user']},{'$set':{'id':id}})
                 db.users.update_one({'username':session['user']},{'$set':{'video_links':video_links}})
             return redirect(url_for('extract'))
-    return render_template('Home.html',age=age,epass=epass)
+    return render_template('Home.html',age=age)
 
 # Video Page.
 @app.route('/Video',methods=['GET','POST'])
@@ -281,11 +280,7 @@ def ChatBot():
 @app.route('/GroupChat')
 def GroupChat():
     user = db.users.find_one({'username': session['user']})
-    epass=user.get('elite') 
-    if epass:
-        return render_template('GroupChat.html')
-    else:
-        return redirect(url_for('crypto'))
+    return render_template('GroupChat.html')
     
 # Meeting In Page.
 @app.route('/MeetingIn')
