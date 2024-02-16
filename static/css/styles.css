@@ -11275,10 +11275,10 @@ header.masthead {
   padding-bottom: calc(10rem - 4.5rem);
   background: linear-gradient(
       to bottom,
-      rgba(92, 77, 66, 0.8) 0%,
-      rgba(92, 77, 66, 0.8) 100%
+      rgba(92, 77, 66, 0.3) 0%,
+      rgba(92, 77, 66, 0) 100%
     ),
-    url("/static/img/LandingPage.jpg");
+    url("/static/img/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -11400,4 +11400,27 @@ header.masthead .h1 {
 #portfolio .container-xl .portfolio-box:hover .portfolio-box-caption,
 #portfolio .container-xxl .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
+}
+ /* Scroll Bar */
+ 
+ ::-webkit-scrollbar {
+  height: 12px;
+  width: 12px
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f4623a;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #f4623a;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ecf0f1;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #ecf0f1;
 }
