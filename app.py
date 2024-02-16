@@ -95,7 +95,6 @@ def SignUp():
 @app.route('/home', methods=['GET','POST'])
 def home():
     text = request.data.decode('utf-8')
-    # print("Received text:", text)
     if text:
         user = db.users.find_one({'username': 'yukthi@gmail.com'})
         if text == 'button1':
@@ -128,18 +127,6 @@ def home():
             lilink = user.get('li14')
         elif text == 'button15':
             lilink = user.get('li15')
-        elif text == 'button16':
-            lilink = user.get('li16')
-        elif text == 'button17':
-            lilink = user.get('li17')
-        elif text == 'button18':
-            lilink = user.get('li18')
-        elif text == 'button19':
-            lilink = user.get('li19')
-        elif text == 'button20':
-            lilink = user.get('li20')
-        elif text == 'button21':
-            lilink = user.get('li21')
         user = db.users.find_one({'username': session['user']})
         if user:
             db.users.update_one({'username':session['user']},{'$set':{'courslist':lilink}})
@@ -151,7 +138,7 @@ def home():
         to_search = request.form['ytsearch']
         playsearch = request.form['ytplay']
         if playsearch:
-            return redirect(url_for('extrw'))
+            return redirect(url_for('Video'))
         videosSearch = VideosSearch(to_search, limit=7)
         results = videosSearch.result()
         video_links = []
@@ -190,6 +177,11 @@ def home():
             return redirect(url_for('extract'))
     return render_template('Home.html',age=age,epass=epass)
 
+# Video Page.
+@app.route('/Video',methods=['GET','POST'])
+def Video():
+    return render_template('Video.html')
+
 # ProfileEdit Page.
 @app.route('/ProfileEdit',methods=['GET', 'POST'])
 def ProfileEdit():
@@ -201,20 +193,15 @@ def ProfileEdit():
         confpassword = request.form['confpassword']
         age = request.form['age']
         gender = request.form['gender']
-        disability = request.form['disability']
         preflang1 = request.form['preflang1']
         preflang2 = request.form['preflang2']
         user = db.users.find_one({'username': session['user']})
         if user:
             db.users.update_many({'username':session['user']},{'$set':{'username': username, 'password': password,
                      'firstname': firstname, 'lastname': lastname,
-                     'age':age, 'disability':disability,
+                     'age':age,
                      'preflang1':preflang1, 'gender':gender, 
                      'preflang2':preflang2,'confpassword':confpassword}})
-        if disability == 'dyslexia':
-            return redirect(url_for('dyshome'))
-        elif disability == 'deaf':
-            return redirect(url_for('hearhome'))
   
         return redirect(url_for('home'))
     user = db.users.find_one({'username': session['user']})
@@ -224,12 +211,11 @@ def ProfileEdit():
         firstname = user.get('firstname')
         lastname = user.get('lastname')
         age = user.get('age')
-        disability = user.get('disability')
         gender = user.get('gender')
         preflang1 = user.get('preflang1')
         preflang2 = user.get('preflang2')
         confpassword = user.get('confpassword')
-    return render_template('ProfileEdit.html',username = username,password=password,firstname=firstname,lastname=lastname,age=age,disability=disability,gender=gender,preflang1=preflang1,preflang2=preflang2,confpassword=confpassword)
+    return render_template('ProfileEdit.html',username = username,password=password,firstname=firstname,lastname=lastname,age=age,gender=gender,preflang1=preflang1,preflang2=preflang2,confpassword=confpassword)
 
 # Courses Page.
 @app.route('/Courses',methods=['GET','POST'])
