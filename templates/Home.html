@@ -141,7 +141,6 @@
                 >Nanba</a
               >
             </li>
-            {% if epass == "no": %}
             <li class="nav-item">
               <a
                 class="nav-link"
@@ -150,13 +149,6 @@
                 >Groupchat</a
               >
             </li>
-            {% else: %}
-            <li class="nav-item">
-              <a class="nav-link" href="crypto" data-translate="navbarGroupchat"
-                >Groupchat</a
-              >
-            </li>
-            {% endif %}
             <li class="nav-item">
               <a class="nav-link" href="MeetingIn" data-translate="navbarMeet"
                 >Meet</a
@@ -304,33 +296,7 @@
       <br /><br />
       <h3 class="suggested-videos-heading">SUGGESTED LESSONS</h3>
       <div class="videos-container">
-        {% if disability == "dyslexia" %}
-        <div class="video-item-container">
-          <img src="/static/img/19.png" alt="" />
-          <button onclick="sendText('button18')">Watch</button>
-        </div>
-        <div class="video-item-container">
-          <img src="/static/img/18.png" alt="" />
-          <button onclick="sendText('button17')">Watch</button>
-        </div>
-        <div class="video-item-container">
-          <img src="/static/img/17.png" alt="" />
-          <button onclick="sendText('button16')">Watch</button>
-        </div>
-        {% elif disability == "deaf" %}
-        <div class="video-item-container">
-          <img src="/static/img/20.png" alt="" />
-          <button onclick="sendText('button19')">Watch</button>
-        </div>
-        <div class="video-item-container">
-          <img src="/static/img/21.png" alt="" />
-          <button onclick="sendText('button20')">Watch</button>
-        </div>
-        <div class="video-item-container">
-          <img src="/static/img/22.png" alt="" />
-          <button onclick="sendText('button21')">Watch</button>
-        </div>
-        {% elif age=='6' or age=='7' or age == '5' %}
+        {% if age=='6' or age=='7' or age == '5' %}
         <div class="video-item-container">
           <img src="/static/img/1.png" alt="" />
           <button onclick="sendText('button1')">Watch</button>
@@ -387,10 +353,6 @@
           <img src="/static/img/13.png" alt="" />
           <button onclick="sendText('button13')">Watch</button>
         </div>
-        <!-- <div class="video-item-container">
-                <img src="/static/img/14.png" alt="">
-                <button onclick="sendText('button14')">Watch</button>
-            </div> -->
         <div class="video-item-container">
           <img src="/static/img/15.png" alt="" />
           <button onclick="sendText('button14')">Watch</button>
