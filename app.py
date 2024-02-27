@@ -6,10 +6,16 @@ from youtubesearchpython import VideosSearch
 from youtube_transcript_api import YouTubeTranscriptApi
 import requests
 import wikipedia
+import openai
+# from flask_socketio import SocketIO, join_room, leave_room, send, emit
+# from googletrans import Translator, LANGUAGES
 
 # _________________________Connecting flask_________________________
 app= Flask(__name__)
 app.secret_key= "password"
+
+# _________________________Connecting OpenAI_________________________
+openai.api_key = "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"
 
 # _________________________Connecting MongoDB_________________________
 client= MongoClient("mongodb://localhost:27017/")
@@ -256,31 +262,59 @@ def Courses():
 @app.route('/ChatBot',methods=['GET','POST'])
 def ChatBot():
     if request.method=='POST':
-        query=request.form['dbt']
-        try:
-            res = client.query(query)
-            output = next(res.results).text
-        except StopIteration:
-            try:
-                output = wikipedia.summary(query,sentences=3)
-            except wikipedia.exceptions.DisambiguationError as e:
-                output = "Sorry, the query is ambiguous. Please provide more context."
-            except wikipedia.exceptions.PageError as e:
-                output = "Sorry, no information found for the query."
-        
-        output = f"""Hey Sujay,
-        That's a nice question and here is the answer - 
-        {output}"""
-        # ht_out = f"{output}"
-        return jsonify(output = output)
+        user_input = request.form['dbt']
+        bot_response = chat(user_input)
+        return jsonify({'output': bot_response})
     else:
         return render_template('ChatBot.html')
     
 # Group Chat Page.
-@app.route('/GroupChat')
-def GroupChat():
-    user = db.users.find_one({'username': session['user']})
-    return render_template('GroupChat.html')
+# @app.route('/GroupChat')
+# def GroupChat():
+#     return render_template('GroupChat.html')
+
+# @socketio.on('connect')
+# def handle_connect():
+#     print('Client connected')
+
+# @socketio.on('message')
+# def handle_message(data):
+#     room = data['room']
+#     message = data['message']
+#     source_language = user_languages[room]
+#     user_name = user_names[request.sid]
+    
+#     for client_room, target_language in user_languages.items():
+#         if client_room != room:  # Exclude the source user's room
+#             translated_message = translate_message(message, source_language, target_language)
+#             emit('user_message', {'user': user_name, 'message': translated_message}, room=client_room)
+
+# @socketio.on('create')
+# def handle_create(data):
+#     room = data['room']
+#     user_languages[room] = data['language']
+#     user_names[request.sid] = data['user']
+#     join_room(room)
+#     emit('system_message', {'message': f'You have created and joined room {room}.'})
+#     emit('system_message', {'message': 'Translation is enabled in this room.'}, room=room)
+
+# @socketio.on('join')
+# def handle_join(data):
+#     room = data['room']
+#     user_languages[room] = data['language']
+#     user_names[request.sid] = data['user']
+#     join_room(room)
+#     emit('system_message', {'message': f'You have joined room {room}.'})
+#     emit('system_message', {'message': 'Translation is enabled in this room.'}, room=room)
+
+# @socketio.on('leave')
+# def handle_leave(data):
+#     room = data['room']
+#     user_name = user_names[request.sid]
+#     leave_room(room)
+#     emit('system_message', {'message': f'{user_name} has left the room.'}, room=room)
+#     del user_names[request.sid] 
+#     emit('update_users', {'users': list(user_names.values())}, room=room)  
     
 # Meeting In Page.
 @app.route('/MeetingIn')
@@ -299,6 +333,16 @@ def MeetingHome():
         roomID = request.form['roomID']
         return redirect("/vdocall?roomID="+roomID)
     return render_template('MeetingHome.html')
+
+# ________________________________________________Functions________________________________________________
+# ChatBot Function.
+
+def chat(prompt):
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return response.choices[0].message.content.strip()
 
 if __name__== "__main__":
     app.run(debug= True)
