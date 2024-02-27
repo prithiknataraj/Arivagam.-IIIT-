@@ -15,7 +15,7 @@ app= Flask(__name__)
 app.secret_key= "password"
 
 # _________________________Connecting OpenAI_________________________
-openai.api_key = "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"
+openai.api_key = "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"
 
 # _________________________Connecting MongoDB_________________________
 client= MongoClient("mongodb://localhost:27017/")
