@@ -14,16 +14,17 @@
     <link href="/static/css/styles.css" rel="stylesheet" />
     <title>Arivagam.</title>
     <style>
-      .nanba {
+      body.nanba {
         background-image: url("/static/img/background.jpg");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         position: fixed;
+        overflow: auto; /* Add this line */
       }
-
+      
       #nanba-body {
-        overflow: auto;
+        /* Remove overflow property from here */
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -67,6 +68,7 @@
         width: 50%;
         display: flex;
         align-items: center;
+        justify-content: center;
       }
       .bot-qn input.doubt {
         flex: 1;
@@ -80,12 +82,13 @@
         border-radius: 5px;
       }
       .chat-container {
-        max-height: 82.5vh;
+        max-height: 100vh;
         overflow-y: auto;
         margin-top: 300px;
         padding-top: 40px;
         padding-bottom: 40px;
       }
+      
       .message {
         margin: 5px;
         padding: 10px;
@@ -213,6 +216,7 @@
               flex-wrap: wrap;
               align-items: center;
               justify-content: center;
+              overflow: auto;
             "
           ></div>
           <div
